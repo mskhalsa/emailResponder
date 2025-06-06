@@ -1,4 +1,3 @@
-# app/fetcher.py
 import requests
 from models import Email
 
