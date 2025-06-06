@@ -1,5 +1,6 @@
 # app/mock_llm.py
-import asyncio
+
+import time
 import numpy as np
 
 responses = [
@@ -11,12 +12,12 @@ responses = [
 
 response_counter = 0
 
-async def mock_openai_response(subject: str, body: str) -> str:
+def mock_openai_response(subject: str, body: str) -> str:
     global response_counter
     delay = np.random.exponential(scale=0.5)
     delay = max(0.4, min(delay, 0.6))
-    await asyncio.sleep(delay)
+    time.sleep(delay)
 
-    text = responses[response_counter % len(responses)]
+    response_text = responses[response_counter % len(responses)]
     response_counter += 1
-    return f"Re: {subject}\n\n{text}"
+    return f"Re: {subject}\n\n{response_text}"
